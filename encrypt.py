@@ -13,7 +13,7 @@ File listing
 '''
 files = []
 for file in os.listdir():
-    if file == "encrypt.py" or file.startswith('.') or file == "decrypt.py" or file.endswith('.key'):
+    if file == "encrypt.py" or file.startswith('.') or file == "decrypt.py" or file.endswith('.key') or file == "LICENSE" or file == "README.md":
         continue
     files.append(file)
 

@@ -8,18 +8,14 @@ with open("decrypt.key", "rb") as key:
     sec_key = key.read()
 
 '''
-File Management
+File listing
 '''
 files = []
 for file in os.listdir():
-    if file == "encrypt.py" or file.startswith('.') or file == "decrypt.key" or file.endswith('.md') or file == "LICENSE":
+    if file == "encrypt.py" or file.startswith('.') or file == "decrypt.py" or file.endswith('.key') or file == "LICENSE" or file == "README.md" or file == "decrypt.py":
         continue
-    if os.path.isfile(file):
-        files.append(file)
+    files.append(file)
 
-'''
-File Decryption
-'''
 for file in files:
     with open(file, "rb") as target_file:
         contents = target_file.read()
